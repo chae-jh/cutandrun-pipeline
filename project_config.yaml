@@ -1,0 +1,47 @@
+# For use with the Furey Lab CutNRun Snakemake pipeline 1.1
+
+sampleInfo: "samplesheet.tsv"
+#sampleInfoDelimiter: ","
+#sampleName: ["sample"]
+
+
+#Available Module Versions
+module: 
+	#wasp
+	pythonVer: "python/3.9.6"
+	#align
+	bowtie2:
+		bowtie2Ver: "bowtie2/2.4.5"
+		bowtie2Index: "/proj/fureylab/genomes/human/refgenie/alias/hg38/bowtie2_index/default/hg38"
+	#convertToBam, sortBam, nameSortBam 
+	samtoolsVer: "samtools/1.21"
+	#fastQC, fastQC after trim
+	fastqcVer: "fastqc/0.12.1"  
+	#fastqScreen
+	fqscreen:       
+		fqscreenPath: ""
+		fqscreenConf: ""
+	#trim_adapter
+	bbmapVer: "bbmap/39.13"
+	#markDups
+	picard:
+		picardVer: "picard/2.26.11"
+	        picardPath: "/nas/longleaf/apps/picard/2.26.11/picard-2.26.11/picard.jar"
+	#convertBamToBed, makeFragmentBedGraphs
+	bedtoolsVer: "bedtools/2.30"
+	#convertToBigWig
+	ucscVer: "ucsctools/320"
+	#callPeaks
+	macsVer: "macs/2.2.9.1"
+	#qcReport
+	multiqcVer: "multiqc/1.25.1"
+
+
+#WASP pipeline directory (Set the path after uploading WASP_script to  gitlab)
+WASP_dir: ""
+
+#Direct path to genotype directory
+genotype_dir: "/proj/fureylab/data/Genotypes/human/imputed_vcfs_hg38"
+
+#Direct path to permenant space for moving out final files.
+projectDir: ""
