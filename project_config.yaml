@@ -1,4 +1,4 @@
-# For use with the Furey Lab CutNRun Snakemake pipeline 1.1
+# For use with the Furey Lab CutNRun Snakemake pipeline 1.0.0
 
 sampleInfo: "samplesheet.tsv"
 #sampleInfoDelimiter: ","
@@ -18,9 +18,9 @@ module:
 	#fastQC, fastQC after trim
 	fastqcVer: "fastqc/0.12.1"  
 	#fastqScreen
-	fqscreen:       
-		fqscreenPath: ""
-		fqscreenConf: ""
+	fqscreen:
+		fqscreenPath: "/proj/fureylab/bin/fastq_screen_0.14/fastq_screen"
+		fqscreenConf: "/proj/fureylab/bin/fastq_screen_0.14/fastq_screen.conf"
 	#trim_adapter
 	bbmapVer: "bbmap/39.13"
 	#markDups
@@ -37,11 +37,14 @@ module:
 	multiqcVer: "multiqc/1.25.1"
 
 
-#WASP pipeline directory (Set the path after uploading WASP_script to  gitlab)
-WASP_dir: ""
-
 #Direct path to genotype directory
 genotype_dir: "/proj/fureylab/data/Genotypes/human/imputed_vcfs_hg38"
+
+#Moves final results files for locally run samples to permenant space.
+#NOTE: set to TRUE after running the pipeline, checking that everything had run correctly,
+#      and the rerun the pipeline using the same submission statement.
+moveOutFiles: FALSE
+
 
 #Direct path to permenant space for moving out final files.
 projectDir: ""
