@@ -34,7 +34,7 @@ def read_samples():
 
         	samp_dict[sample_id][modification] = {
             		'fastq_1': row['fastq_1'],
-            		'fastq_2': row['fastq_2'],
+            		'fastq_2': row['fastq_2']
        	}
     	return samp_dict
 
