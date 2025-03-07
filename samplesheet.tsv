@@ -4,3 +4,7 @@
 ##Example
 #    120	igG	Fastq/120_igg_R1.fastq	Fastq/120_igg_R2.fastq	
 #    120	histone1	Fastq/120_histone1_R1.fastq	Fastq/120_histone1_R2.fastq
+
+#header
+sample	modification	fastq_1	fastq_2
+#Write sample information here
