@@ -1,7 +1,60 @@
+# CutNRun Snakemake Pipeline 1.0.0
+# Date: 2-27-2025
+# Written by:
+#	Ayesh Awad
+#	Jeongho Chae
+
+configfile: "project_config.yaml"
+modules=config['module']
+
+
+import pandas as pd
+
+def read_samples():
+	"""
+	Reads the samplesheet.tsv file and returns a dictionary that looks like this:
+	{
+    		'Sample1': {
+        		'Mod1': {'fastq_1': 'Fastq/Sample1_Mod1_R1.fastq.gz', 'fastq_2': 'Fastq/Sample1_Mod1_R2.fastq.gz'},
+        		'Mod2': {'fastq_1': 'Fastq/Sample1_Mod2_R1.fastq.gz', 'fastq_2': 'Fastq/Sample1_Mod2_R2.fastq.gz'}
+    		},
+    		'Sample2': {
+        		'Mod1': {'fastq_1': 'Fastq/Sample2_Mod1_R1.fastq.gz', 'fastq_2': 'Fastq/Sample2_Mod1_R2.fastq.gz'}
+    		}
+	}
+	"""
+	f = pd.read_csv(config['sampleInfo'], sep="\t")
+
+	samp_dict = {}
+    	for line, row in f.iterrow():
+        	sample_id = row['sample']
+		modification = row['modification']
+
+		if sample_id not in samp_dict = {}
+
+        	samp_dict[sample_id][modification] = {
+            		'fastq_1': row['fastq_1'],
+            		'fastq_2': row['fastq_2'],
+       	}
+    	return samp_dict
+
+SAMPLES = read_samples()
+
+
+###
+# BEGIN PIPELINE
+###
+
+rule all:
+    input:
+        expand(),
+        expand(),
+        expand()
+
 rule fastQC:
     input:
-        r1="Fastq/{sample}_{modification}_R1.fastq.gz",
-        r2="Fastq/{sample}_{modification}_R2.fastq.gz"
+        r1= lambda wildcards: SAMPLES[wildcards.sample][wildcards.modification]['fastq_1'],
+        r2= lambda wildcards: SAMPLES[wildcards.sample][wildcards.modification]['fastq_2']
     output:
         r1_qc="FastQC/{sample}_{modification}_R1_fastqc.html",
         r2_qc="FastQC/{sample}_{modification}_R2_fastqc.html"
@@ -14,8 +67,8 @@ rule fastQC:
 
 rule trim_adapter:
     input:
-        r1="Fastq/{sample}_{modification}_R1.fastq.gz",
-        r2="Fastq/{sample}_{modification}_R2.fastq.gz"
+        r1= lambda wildcards: SAMPLES[wildcards.sample][wildcards.modification]['fastq_1'],
+        r2= lambda wildcards: SAMPLES[wildcards.sample][wildcards.modification]['fastq_2']
     output:
         r1="Fastq/{sample}_{modification}_R1_trim.fastq.gz",
         r2="Fastq/{sample}_{modification}_R2_trim.fastq.gz"
@@ -64,17 +117,20 @@ rule fastqScreen:
         {params.fqscreenPath} --threads {threads} --force --aligner bowtie2 -conf {params.fqscreenConf} {input.r2} --outdir ./FQscreen/
         """
 
-
-HERE WE NEED TO ADD SOMETHING WHERE WE ADD THE REFERENCE GENOME RIGHT? 
-NEED TO CREATE A FUNCTION TO GET THE GENOME FASTAS...
-Mckay's Lab code: 
-def get_genome_fastas(config, speciesList):
+def get_genome_fastas(config):
 	"""
-	Takes config info & list of species as input, returns dict where keys = species name, values = genome fasta paths
+	Reads species information from the config file and returns a dictionary that looks like:
+	{
+        'human': '/path/human.fasta',
+        'e_coli': '/path/e_coli.fasta',
+        'spikein': '/path/spikein.fasta'
+    	}
 	"""
-	get_fasta = lambda species : (species, config['genome'][species]['fasta'])
-	fastas = {genome:fasta for (genome, fasta) in [get_fasta(s) for s in speciesList]}
-	return(fastas)
+	fastas = {
+		species_name: species['fasta']
+		for species_name, species in config['genome'].items()
+	}
+	return fastas
 
 rule bowtie2index:
     input:
@@ -382,3 +438,4 @@ rule call_peaks_macs2:
         -f BAMPE -g hs --keep-dup all --outdir Peaks/MACS2/ \
         -n {wildcards.sample}_{wildcards.modification} --broad
         """
+
