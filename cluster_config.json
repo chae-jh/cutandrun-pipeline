@@ -1,0 +1,252 @@
+{
+    "__default__":
+    {
+        "mem" : "10G",
+        "time" : "8:00:00",
+        "ntasks" : "1",
+        "output" : "log_results/{wildcards.sample}/logs/{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "fastQC":
+    {
+        "mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/1_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/1_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "trim_adapter":
+    {
+	"mem" : "20G",
+	"time" : "5:00:00",
+	"ntasks" : "24",
+	"output" : "log_results/{wildcards.sample}/logs/2_{rule}_SLURM.out",
+	"err" : "log_results/{wildcards.sample}/logs/2_{rule}_SLURM.err",
+	"jobname" : "{rule}"
+    },
+
+    "fastQC_trim":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "24",
+        "output" : "log_results/{wildcards.sample}/logs/3_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/3_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "fastqScreen":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/4_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/4_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "bowtie2index":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/5_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/5_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "align_target":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/6_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/6_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "align_spikein":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/7_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/7_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "extract_alignment_stats_target":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/8_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/8_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    }
+
+    "extract_alignment_stats_spikein":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/9_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/9_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "filter_reads_target":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/10_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/10_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "filter_reads_spikein":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/11_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/11_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "mark_duplicates_target":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/12_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/12_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "mark_duplicates_spikein":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/13_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/13_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "remove_duplicates_igg":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/14_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/14_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "keep_duplicates_histone":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/15_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/15_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "compute_read_counts":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/16_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/16_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "compute_normalization_factor":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/17_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/17_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "sort_bam":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/18_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/18_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "bam_to_bedgraph":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/19_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/19_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "normalize_bedgraph":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/20_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/20_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "sort_bedgraph":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/21_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/21_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "bedgraph_to_bigwig":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/22_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/22_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "call_peaks_seacr":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/23_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/23_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    },
+
+    "call_peaks_macs2":
+    {
+     	"mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "20",
+        "output" : "log_results/{wildcards.sample}/logs/24_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/24_{rule}_SLURM.err",
+        "jobname" : "{rule}"
+    }
+
+}
