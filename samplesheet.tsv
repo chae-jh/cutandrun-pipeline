@@ -1,0 +1,6 @@
+# [sample_ID] \t [modification] \t [fastq_1 path] \t [fastq_2_path]
+# Need to be tab-separated between values
+
+##Example
+#    120	igG	Fastq/120_igg_R1.fastq	Fastq/120_igg_R2.fastq	
+#    120	histone1	Fastq/120_histone1_R1.fastq	Fastq/120_histone1_R2.fastq
