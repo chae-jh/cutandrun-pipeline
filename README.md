@@ -1,4 +1,4 @@
-# GUTandRUN Snakemake Pipeline 1.0.0
+# CUTandRUN Snakemake Pipeline 1.0.0
 
 ### Authors    
 **Ayesh Awad**
