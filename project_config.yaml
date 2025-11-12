@@ -1,59 +1,77 @@
 # For use with the Furey Lab CutNRun Snakemake pipeline 1.0.0
 
-sampleInfo: "samplesheet.tsv"
-#sampleInfoDelimiter: ","
-#sampleName: ["sample"]
+#samplesheet file containing direct_paths for the samples.
+sampleInfo: "Samples/sample_modifications.tsv"
 
 
-#Available Module Versions
-module: 
-	#wasp
-	pythonVer: "python/3.9.6"
-	#align
-	bowtie2:
-		bowtie2Ver: "bowtie2/2.4.5"
-		bowtie2Index: "/proj/fureylab/genomes/human/refgenie/alias/hg38/bowtie2_index/default/hg38"
-	#convertToBam, sortBam, nameSortBam 
-	samtoolsVer: "samtools/1.21"
-	#fastQC, fastQC after trim
-	fastqcVer: "fastqc/0.12.1"  
-	#fastqScreen
-	fqscreen:
-		fqscreenPath: "/proj/fureylab/bin/fastq_screen_0.14/fastq_screen"
-		fqscreenConf: "/proj/fureylab/bin/fastq_screen_0.14/fastq_screen.conf"
-	#trim_adapter
-	cutadaptVer: "cutadapt/4.10"
-	#markDups
-	picard:
-		picardVer: "picard/2.26.11"
-	        picardPath: "/nas/longleaf/apps/picard/2.26.11/picard-2.26.11/picard.jar"
-	#convertBamToBed, makeFragmentBedGraphs
-	bedtoolsVer: "bedtools/2.30"
-	#convertToBigWig
-	ucscVer: "ucsctools/320"
-	#callPeaks
-	macsVer: "macs/2.2.9.1"
-	seacrVer: 
-	#qcReport
-	multiqcVer: "multiqc/1.25.1"
+# This is for hg38 downlaoded from 
+# http://hgdownload.cse.ucsc.edu/goldenPath/hg38/bigZips/hg38.chrom.sizes
+chrom_sizes: "Resources/Genomes/hg38/chrom_sizes.txt"
 
-#Target & Spike-in genome fasta Direct path
-genome:
-	human:
-		fasta: ""
-	e_coli:
-		fasta: ""
-	spikein:
-		fasta: ""
 
-#Direct path to genotype directory
+# These are balcklist region for hg38 from
+# https://www.encodeproject.org/files/ENCFF356LFX/
+blacklist: "Resources/Blacklists/GRCh38_unified_blacklist.bed"
+
+
+# Available Module Versions
+module:
+  # 1_fastQC, 3_fastQC_trim
+  fastqcVer: "fastqc/0.12.1"
+
+  # 2_trim_adapter
+  cutadapt: 
+    cutadaptVer: "cutadapt/4.10"
+    # https://cutadapt.readthedocs.io/en/stable/
+    # Current hard coded for Illumina TruSeq adapters. Modify -a/-A for other adapters
+    a: AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+    A: AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+    qualityCutoff: 10
+    minimumLength: 20
+
+  # 4_fastqScreen
+  fqscreen:
+    fqscreenPath: "/proj/fureylab/bin/fastq_screen_0.14/fastq_screen"
+    fqscreenConf: "Bin/fastq_screen.conf"
+
+  # 6_align_to_genome
+  bowtie2:
+    bowtie2Ver: "bowtie2/2.4.5"
+    bowtie2Index: 
+      hg38: "/proj/fureylab/genomes/human/refgenie/alias/hg38/bowtie2_index/default"
+      Ecoli: "Resources/Genomes/Ecoli/Ecoli_bowtie2"
+
+  # 7_extract_alignment_stats_target, 8_filter_reads, 9_count_reads_Ecoli, 11_sort_remove_blacklist_regions, 13_remove_duplicates,
+  # 14_count_reads_hg38, 16_sort_bam
+  samtoolsVer: "samtools/1.21"
+
+  # 10_remove_blacklist_regions, 20_bam_to_bed
+  bedtoolsVer: "bedtools/2.31"
+
+  # 12_mark_duplicates
+  picard:
+    picardVer: "picard/2.26.11"
+    picardPath: "/nas/longleaf/apps/picard/2.26.11/picard-2.26.11/picard.jar"
+
+  # 17_normalize_bam_RPGC, 18_normalize_bam_spikein
+  deeptoolsVer: "deeptools/3.5.4"
+
+  # 19_call_peaks_macs2
+  macsVer: "macs/2.2.9.1"
+
+  # 21_call_peaks_sicer2
+  sicer2Path: "/proj/fureylab/ayesh/SICER2/bin/sicer"
+  pythonVer: "python/3.9.6"
+
+
+# Direct path to genotype directory
 genotype_dir: "/proj/fureylab/data/Genotypes/human/imputed_vcfs_hg38"
 
-#Moves final results files for locally run samples to permenant space.
-#NOTE: set to TRUE after running the pipeline, checking that everything had run correctly,
-#      and the rerun the pipeline using the same submission statement.
+# Moves final results files for locally run samples to permanent space.
+# NOTE: Set to TRUE after running the pipeline, checking that everything had run correctly,
+#       and then rerun the pipeline using the same submission statement.
 moveOutFiles: FALSE
 
-
-#Direct path to permenant space for moving out final files.
+# Direct path to permanent space for moving out final files.
 projectDir: ""
+

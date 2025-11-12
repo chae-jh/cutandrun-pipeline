@@ -1,7 +1,7 @@
 {
     "__default__":
     {
-        "mem" : "10G",
+        "mem" : "20G",
         "time" : "8:00:00",
         "ntasks" : "1",
         "output" : "log_results/{wildcards.sample}/logs/{rule}_SLURM.out",
@@ -21,17 +21,17 @@
 
     "trim_adapter":
     {
-	"mem" : "20G",
-	"time" : "5:00:00",
-	"ntasks" : "24",
-	"output" : "log_results/{wildcards.sample}/logs/2_{rule}_SLURM.out",
-	"err" : "log_results/{wildcards.sample}/logs/2_{rule}_SLURM.err",
-	"jobname" : "{rule}"
+        "mem" : "20G",
+        "time" : "5:00:00",
+        "ntasks" : "24",
+        "output" : "log_results/{wildcards.sample}/logs/2_{rule}_SLURM.out",
+        "err" : "log_results/{wildcards.sample}/logs/2_{rule}_SLURM.err",
+        "jobname" : "{rule}"
     },
 
     "fastQC_trim":
     {
-     	"mem" : "20G",
+        "mem" : "20G",
         "time" : "5:00:00",
         "ntasks" : "24",
         "output" : "log_results/{wildcards.sample}/logs/3_{rule}_SLURM.out",
@@ -41,7 +41,7 @@
 
     "fastqScreen":
     {
-     	"mem" : "20G",
+        "mem" : "20G",
         "time" : "5:00:00",
         "ntasks" : "20",
         "output" : "log_results/{wildcards.sample}/logs/4_{rule}_SLURM.out",
@@ -49,7 +49,7 @@
         "jobname" : "{rule}"
     },
 
-    "bowtie2index":
+    "count_reads_spikein":
     {
      	"mem" : "20G",
         "time" : "5:00:00",
@@ -59,9 +59,9 @@
         "jobname" : "{rule}"
     },
 
-    "align_target":
+    "align_to_genome":
     {
-     	"mem" : "20G",
+        "mem" : "20G",
         "time" : "5:00:00",
         "ntasks" : "20",
         "output" : "log_results/{wildcards.sample}/logs/6_{rule}_SLURM.out",
@@ -69,9 +69,9 @@
         "jobname" : "{rule}"
     },
 
-    "align_spikein":
+    "extract_alignment_stats":
     {
-     	"mem" : "20G",
+        "mem" : "20G",
         "time" : "5:00:00",
         "ntasks" : "20",
         "output" : "log_results/{wildcards.sample}/logs/7_{rule}_SLURM.out",
@@ -79,19 +79,19 @@
         "jobname" : "{rule}"
     },
 
-    "extract_alignment_stats_target":
+    "filter_reads":
     {
-     	"mem" : "20G",
+        "mem" : "20G",
         "time" : "5:00:00",
         "ntasks" : "20",
         "output" : "log_results/{wildcards.sample}/logs/8_{rule}_SLURM.out",
         "err" : "log_results/{wildcards.sample}/logs/8_{rule}_SLURM.err",
         "jobname" : "{rule}"
-    }
+    },
 
-    "extract_alignment_stats_spikein":
+    "count_reads_Ecoli":
     {
-     	"mem" : "20G",
+        "mem" : "20G",
         "time" : "5:00:00",
         "ntasks" : "20",
         "output" : "log_results/{wildcards.sample}/logs/9_{rule}_SLURM.out",
@@ -99,9 +99,9 @@
         "jobname" : "{rule}"
     },
 
-    "filter_reads_target":
+    "remove_blacklist_regions":
     {
-     	"mem" : "20G",
+        "mem" : "20G",
         "time" : "5:00:00",
         "ntasks" : "20",
         "output" : "log_results/{wildcards.sample}/logs/10_{rule}_SLURM.out",
@@ -109,7 +109,7 @@
         "jobname" : "{rule}"
     },
 
-    "filter_reads_spikein":
+    "sort_remove_blacklist_regions":
     {
      	"mem" : "20G",
         "time" : "5:00:00",
@@ -119,7 +119,7 @@
         "jobname" : "{rule}"
     },
 
-    "mark_duplicates_target":
+    "mark_duplicates":
     {
      	"mem" : "20G",
         "time" : "5:00:00",
@@ -129,9 +129,9 @@
         "jobname" : "{rule}"
     },
 
-    "mark_duplicates_spikein":
+    "remove_duplicates":
     {
-     	"mem" : "20G",
+        "mem" : "20G",
         "time" : "5:00:00",
         "ntasks" : "20",
         "output" : "log_results/{wildcards.sample}/logs/13_{rule}_SLURM.out",
@@ -139,9 +139,9 @@
         "jobname" : "{rule}"
     },
 
-    "remove_duplicates_igg":
+    "count_reads_hg38":
     {
-     	"mem" : "20G",
+        "mem" : "20G",
         "time" : "5:00:00",
         "ntasks" : "20",
         "output" : "log_results/{wildcards.sample}/logs/14_{rule}_SLURM.out",
@@ -149,7 +149,7 @@
         "jobname" : "{rule}"
     },
 
-    "keep_duplicates_histone":
+    "compute_normalization_factor":
     {
      	"mem" : "20G",
         "time" : "5:00:00",
@@ -159,9 +159,9 @@
         "jobname" : "{rule}"
     },
 
-    "compute_read_counts":
+    "sort_bam":
     {
-     	"mem" : "20G",
+        "mem" : "20G",
         "time" : "5:00:00",
         "ntasks" : "20",
         "output" : "log_results/{wildcards.sample}/logs/16_{rule}_SLURM.out",
@@ -169,7 +169,7 @@
         "jobname" : "{rule}"
     },
 
-    "compute_normalization_factor":
+    "normalize_bam_RPGC":
     {
      	"mem" : "20G",
         "time" : "5:00:00",
@@ -179,9 +179,9 @@
         "jobname" : "{rule}"
     },
 
-    "sort_bam":
+    "normalize_bam_spikein":
     {
-     	"mem" : "20G",
+        "mem" : "20G",
         "time" : "5:00:00",
         "ntasks" : "20",
         "output" : "log_results/{wildcards.sample}/logs/18_{rule}_SLURM.out",
@@ -189,9 +189,9 @@
         "jobname" : "{rule}"
     },
 
-    "bam_to_bedgraph":
+    "call_peaks_macs2":
     {
-     	"mem" : "20G",
+        "mem" : "20G",
         "time" : "5:00:00",
         "ntasks" : "20",
         "output" : "log_results/{wildcards.sample}/logs/19_{rule}_SLURM.out",
@@ -199,9 +199,9 @@
         "jobname" : "{rule}"
     },
 
-    "normalize_bedgraph":
+    "bam_to_bed":
     {
-     	"mem" : "20G",
+        "mem" : "20G",
         "time" : "5:00:00",
         "ntasks" : "20",
         "output" : "log_results/{wildcards.sample}/logs/20_{rule}_SLURM.out",
@@ -209,44 +209,15 @@
         "jobname" : "{rule}"
     },
 
-    "sort_bedgraph":
+    "call_peaks_sicer2":
     {
-     	"mem" : "20G",
+        "mem" : "20G",
         "time" : "5:00:00",
         "ntasks" : "20",
         "output" : "log_results/{wildcards.sample}/logs/21_{rule}_SLURM.out",
         "err" : "log_results/{wildcards.sample}/logs/21_{rule}_SLURM.err",
         "jobname" : "{rule}"
-    },
-
-    "bedgraph_to_bigwig":
-    {
-     	"mem" : "20G",
-        "time" : "5:00:00",
-        "ntasks" : "20",
-        "output" : "log_results/{wildcards.sample}/logs/22_{rule}_SLURM.out",
-        "err" : "log_results/{wildcards.sample}/logs/22_{rule}_SLURM.err",
-        "jobname" : "{rule}"
-    },
-
-    "call_peaks_seacr":
-    {
-     	"mem" : "20G",
-        "time" : "5:00:00",
-        "ntasks" : "20",
-        "output" : "log_results/{wildcards.sample}/logs/23_{rule}_SLURM.out",
-        "err" : "log_results/{wildcards.sample}/logs/23_{rule}_SLURM.err",
-        "jobname" : "{rule}"
-    },
-
-    "call_peaks_macs2":
-    {
-     	"mem" : "20G",
-        "time" : "5:00:00",
-        "ntasks" : "20",
-        "output" : "log_results/{wildcards.sample}/logs/24_{rule}_SLURM.out",
-        "err" : "log_results/{wildcards.sample}/logs/24_{rule}_SLURM.err",
-        "jobname" : "{rule}"
     }
 
 }
+
