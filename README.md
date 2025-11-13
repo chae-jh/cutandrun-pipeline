@@ -1,7 +1,7 @@
 # CUTandRUN Snakemake Pipeline 1.0.0
 
 ### Authors    
-**Ayesh Awad**
+**Ayesh Awad** (@ayeshawad)
 <br>
 **Jeongho Chae**
 <br>
